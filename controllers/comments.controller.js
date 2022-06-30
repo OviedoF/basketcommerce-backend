@@ -3,7 +3,7 @@ const commentsController = {};
 
 commentsController.getAllComments = async (req, res) => {
     try{
-        const comments = Comments.find();
+        const comments = await Comments.find();
 
         res.status(200).send(comments);
     } catch (e){
@@ -14,7 +14,12 @@ commentsController.getAllComments = async (req, res) => {
 commentsController.postComment = async (req, res) => {
     try {
         const body = req.body;
-        console.log(body);
+
+        const newComment = new Comments(body);
+        await newComment.save();
+
+        console.log(newComment);
+        res.status(201).send(newComment);
     } catch (error) {
         res.status(500).send(error);
     }

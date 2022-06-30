@@ -32,6 +32,7 @@ route.get('/', (res, req) => {
 })
 
 app.use('/api/products', require(path.join(__dirname, 'routes/products.routes')));
+app.use('/api/comments', require(path.join(__dirname, 'routes/comments.routes')));
 /* ------ */
 
 app.listen(port, (req, res) => {

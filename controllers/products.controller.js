@@ -25,6 +25,18 @@ productController.getOneProduct = async (req, res) => {
     }
 }
 
+productController.getOneCategory = async (req, res) => {
+    try {
+        const category = req.params.category.charAt(0).toUpperCase() + req.params.category.slice(1);
+
+        const productsFinded = await Product.find({category: category});
+
+        res.send(productsFinded);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 productController.postProduct = async (req, res) => {
     try {
         const images = []
@@ -60,5 +72,27 @@ productController.postProduct = async (req, res) => {
         res.status(500).send('por favor, revise los datos');
     }
 }
+
+productController.deleteProduct = async (req, res) => {
+    try {
+        const productDeleted = await Product.findByIdAndDelete(req.params.id);
+
+        res.status(200).send(productDeleted);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('No se ha podido eliminar el contenido');
+    }
+};
+
+productController.actualizeProduct = async (req, res) => {
+    try {
+        const actualizedProduct = await Product.findByIdAndUpdate(req.params.id, req.body);
+
+        res.status(200).send(actualizedProduct);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('No se ha podido actualizar el producto');
+    }
+} 
 
 module.exports = productController;

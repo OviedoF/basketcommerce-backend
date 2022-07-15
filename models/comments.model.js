@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
     name: String,
-    mail: String,
+    email: String,
     typeQuery: String,
     customQuery: String,
     details: String

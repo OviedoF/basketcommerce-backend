@@ -25,4 +25,14 @@ commentsController.postComment = async (req, res) => {
     }
 }
 
+commentsController.deleteComment = async (req, res) => {
+    try {
+        await Comments.findByIdAndDelete(req.params.id);
+        
+        res.status(200).send('Eliminado con éxito!')
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
 module.exports = commentsController;

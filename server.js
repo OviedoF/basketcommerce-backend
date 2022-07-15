@@ -3,6 +3,7 @@ const path = require('path');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const route = express.Router();
+const cowsay = require('cowsay');
 
 /* initialize */
 require('dotenv').config();
@@ -33,8 +34,11 @@ route.get('/', (res, req) => {
 
 app.use('/api/products', require(path.join(__dirname, 'routes/products.routes')));
 app.use('/api/comments', require(path.join(__dirname, 'routes/comments.routes')));
+app.use('/api/categorys', require(path.join(__dirname, 'routes', 'categorys.routes')));
 /* ------ */
 
 app.listen(port, (req, res) => {
-    console.log('server on port', port)
+    console.log(cowsay.say({
+        text: 'server on port ' + port
+    }))
 })
